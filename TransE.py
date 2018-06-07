@@ -147,9 +147,10 @@ class TransE:
 				for line in f.readlines():
 					line_list = line.strip().split('\t')
 					assert len(line_list) == 3
+					# print(line_list)
 					headid = self.__entity2id[line_list[0]]
-					relationid = self.__relation2id[line_list[1]]
-					tailid = self.__entity2id[line_list[2]]
+					relationid = self.__relation2id[line_list[2]]
+					tailid = self.__entity2id[line_list[1]]
 					triple_list.append((headid, relationid, tailid))
 					self.__hr_t[(headid, relationid)].add(tailid)
 					self.__tr_h[(tailid, relationid)].add(headid)
@@ -275,7 +276,7 @@ def test_operation(model):
 
 def main():
 	parser = argparse.ArgumentParser(description = "TransE")
-	parser.add_argument('--data_dir', dest='data_dir', type=str, help='the directory of dataset', default='../Fb15k_withtext/')
+	parser.add_argument('--data_dir', dest='data_dir', type=str, help='the directory of dataset', default='data/FB15k/')
 	parser.add_argument('--learning_rate', dest='learning_rate', type=float, help='learning rate', default=0.01)
 	parser.add_argument('--batch_size', dest='batch_size', type=int, help="batch size", default=4096)
 	parser.add_argument('--max_iter', dest='max_iter', type=int, help='maximum interation', default=100)
